@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="content.css" />
 <link rel="stylesheet" type="text/css" href="nav.css" />
 <meta http-equiv="content-type" content="text/html;  charset=utf-8" />
-<title>Automatización del riego | Invernadero </title>
+<title>Programación SteaMakers | Invernadero </title>
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <meta name="author" content="FRANCISCO ABARCA" />
 <link rel="license" type="text/html" href="http://creativecommons.org/licenses/by-sa/4.0/" />
@@ -16,7 +16,7 @@
 <script type="text/javascript" src="common.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
-<body class="exe-web-site" id="exe-node-3"><script type="text/javascript">document.body.className+=" js"</script>
+<body class="exe-web-site" id="exe-node-7"><script type="text/javascript">document.body.className+=" js"</script>
 <div id="content">
 <p id="skipNav"><a href="#main" class="sr-av">Saltar la navegación</a></p>
 <header id="header" ><div id="headerContent">Invernadero</div></header>
@@ -25,11 +25,11 @@
    <li><a href="index.html" class="daddy main-node">El Invernadero Escolar</a></li>
    <li><a href="descripcin_del_proyecto.html" class="no-ch">Descripción del Proyecto</a></li>
    <li><a href="puesta_a_punto_del_invernadero.html" class="no-ch">Puesta a punto del Invernadero</a></li>
-   <li id="active"><a href="automatizacin_del_riego.html" class="active no-ch">Automatización del riego</a></li>
+   <li><a href="automatizacin_del_riego.html" class="no-ch">Automatización del riego</a></li>
    <li><a href="sensores_del_invernadero.html" class="no-ch">Sensores del Invernadero</a></li>
    <li><a href="comandos_del_invernadero.html" class="no-ch">Comandos del Invernadero</a></li>
    <li><a href="programacin_de_la_cmara_esp32.html" class="no-ch">Programación de la cámara ESP32</a></li>
-   <li><a href="programacin_steamakers.html" class="no-ch">Programación SteaMakers</a></li>
+   <li id="active"><a href="programacin_steamakers.html" class="active no-ch">Programación SteaMakers</a></li>
    <li><a href="home_assistant_en_raspberry_pi.html" class="daddy">Home Assistant en Raspberry Pi</a>
    <ul class="other-section">
       <li><a href="configuracin_de_esphome.html" class="no-ch">Configuración de ESPHOME</a></li>
@@ -42,49 +42,21 @@
 </nav>
 <div id='topPagination'>
 <nav class="pagination noprt">
-<a href="puesta_a_punto_del_invernadero.html" class="prev"><span><span>&laquo; </span>Anterior</span></a> <span class="sep">| </span><a href="sensores_del_invernadero.html" class="next"><span>Siguiente<span> &raquo;</span></span></a>
+<a href="programacin_de_la_cmara_esp32.html" class="prev"><span><span>&laquo; </span>Anterior</span></a> <span class="sep">| </span><a href="home_assistant_en_raspberry_pi.html" class="next"><span>Siguiente<span> &raquo;</span></span></a>
 </nav>
 </div>
 <div id="main-wrapper">
 <section id="main">
-<header id="nodeDecoration"><h1 id="nodeTitle">Automatización del riego</h1></header>
-<article class="iDevice_wrapper textIdevice" id="id6">
-<div class="iDevice emphasis0" >
-<div id="ta6_126_2" class="block iDevice_content">
-
-</div>
-</div>
-</article>
-<article class="iDevice_wrapper textIdevice em_iDevice" id="id7">
+<header id="nodeDecoration"><h1 id="nodeTitle">Programación SteaMakers</h1></header>
+<article class="iDevice_wrapper textIdevice em_iDevice" id="id4">
 <div class="iDevice emphasis1" >
-<header class="iDevice_header iDevice_header_noIcon"><h1 class="iDeviceTitle">Automatización del Riego</h1></header>
+<header class="iDevice_header iDevice_header_noIcon"><h1 class="iDeviceTitle">Programación SteaMakers</h1></header>
 <div class="iDevice_inner">
 <div class="iDevice_content_wrapper">
-<div id="ta7_120_2" class="block iDevice_content">
-<div class="exe-text"><p>Para la automatización del riego, aparte de fabricarnos nuestra propia electroválvula con una que estaba averiada, hemos diseñado un sistema de riego basado en goteros y en microaspersores. Veamos el código de control de la electroválvula realizado con arduinoBlocks</p>
-<p><img src="Captura_de_pantalla_-2024-01-22_19-05-52.png" alt="" width="837" height="258" /></p>
-<p>El montaje final de la electroválvula sustituyendo al antiguo sistema queda como se muestra</p>
-<table border="1" style="width: 100%;">
-<tbody>
-<tr>
-<td style="width: 33.3333%;"><img src="IMG_2193.jpg" alt="" width="1512" height="2016" /></td>
-<td style="width: 33.3333%;"><img src="IMG_2195.jpg" alt="" width="1512" height="2016" /></td>
-<td style="width: 33.3333%;"><img src="IMG_2196.jpg" alt="" width="1512" height="2016" /></td>
-</tr>
-</tbody>
-</table>
-<p>La placa de control ESP32 no estará en la caja de la toma del agua porque podría coger humedad, por ese motivo trasladaremos la esp32 y los principales sensores a una pequeña caseta meteorológica realizada ad hoc. </p>
-<table border="1" style="width: 100%;">
-<tbody>
-<tr>
-<td style="width: 29.1644%;"><img src="IMG_2205.jpg" alt="" width="500" height="667" /></td>
-<td style="width: 70.8356%;">
-<p>La torre de control estará ubicada en el lateral del invernadero menos soleado a fin de minimizar la incidencia de la luz solar sobre los instrumentos de medida instalados dentro. La ESP32 conectará con Andared_IoT para el control remoto desde el bot de telegram y para almacenar la información en la base de datos ubicada en nuestro servidor. </p>
-<p></p>
-</td>
-</tr>
-</tbody>
-</table>
+<div id="ta4_124_2" class="block iDevice_content">
+<div class="exe-text"><p>Para el control de los sensores se ha utilizado la aplicación de ArduinoBlocks. El programa es el que se presenta seguidamente (por motivos de privacidad se han omitido los id's de los diferentes campos)</p>
+<p><img src="Captura_de_pantalla_-2024-01-13_23-07-10.png" alt="" width="1368" height="795" /></p>
+<p>SIrva este código de muestra de la gestión de información entre la placa ESP32 y Telegram. Conveiene recordar que el API Token se obtiene cuando se crea el bot en el BotFather de Telegram. El chat id se puede obtener con otro bot (@chatid o chatidbot @idbot @Get My ChatID) que se puede añadir como miembro un grupo. Finalmente, para filtrar los usuario con acceso a determinados comandos se puede usar @userinfobot para conocer el id del miembro autorizado.</p>
 <p></p></div>
 </div>
 </div>
@@ -98,7 +70,7 @@
 </div>
 <div id='bottomPagination'>
 <nav class="pagination noprt">
-<a href="puesta_a_punto_del_invernadero.html" class="prev"><span><span>&laquo; </span>Anterior</span></a> <span class="sep">| </span><a href="sensores_del_invernadero.html" class="next"><span>Siguiente<span> &raquo;</span></span></a>
+<a href="programacin_de_la_cmara_esp32.html" class="prev"><span><span>&laquo; </span>Anterior</span></a> <span class="sep">| </span><a href="home_assistant_en_raspberry_pi.html" class="next"><span>Siguiente<span> &raquo;</span></span></a>
 </nav>
 </div>
 </div>

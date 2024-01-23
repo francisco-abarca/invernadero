@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+<head>
+<link rel="stylesheet" type="text/css" href="base.css" />
+<link rel="stylesheet" type="text/css" href="content.css" />
+<link rel="stylesheet" type="text/css" href="nav.css" />
+<meta http-equiv="content-type" content="text/html;  charset=utf-8" />
+<title>Programación de la cámara ESP32 | Invernadero </title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<meta name="author" content="FRANCISCO ABARCA" />
+<link rel="license" type="text/html" href="http://creativecommons.org/licenses/by-sa/4.0/" />
+<meta name="generator" content="eXeLearning 2.8 - exelearning.net" />
+<!--[if lt IE 9]><script type="text/javascript" src="exe_html5.js"></script><![endif]-->
+<script type="text/javascript" src="exe_jquery.js"></script>
+<script type="text/javascript" src="common_i18n.js"></script>
+<script type="text/javascript" src="common.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body class="exe-web-site" id="exe-node-6"><script type="text/javascript">document.body.className+=" js"</script>
+<div id="content">
+<p id="skipNav"><a href="#main" class="sr-av">Saltar la navegación</a></p>
+<header id="header" ><div id="headerContent">Invernadero</div></header>
+<nav id="siteNav">
+<ul>
+   <li><a href="index.html" class="daddy main-node">El Invernadero Escolar</a></li>
+   <li><a href="descripcin_del_proyecto.html" class="no-ch">Descripción del Proyecto</a></li>
+   <li><a href="puesta_a_punto_del_invernadero.html" class="no-ch">Puesta a punto del Invernadero</a></li>
+   <li><a href="automatizacin_del_riego.html" class="no-ch">Automatización del riego</a></li>
+   <li><a href="sensores_del_invernadero.html" class="no-ch">Sensores del Invernadero</a></li>
+   <li><a href="comandos_del_invernadero.html" class="no-ch">Comandos del Invernadero</a></li>
+   <li id="active"><a href="programacin_de_la_cmara_esp32.html" class="active no-ch">Programación de la cámara ESP32</a></li>
+   <li><a href="programacin_steamakers.html" class="no-ch">Programación SteaMakers</a></li>
+   <li><a href="home_assistant_en_raspberry_pi.html" class="daddy">Home Assistant en Raspberry Pi</a>
+   <ul class="other-section">
+      <li><a href="configuracin_de_esphome.html" class="no-ch">Configuración de ESPHOME</a></li>
+      <li><a href="configuracin_de_actuadores.html" class="no-ch">Configuración de actuadores</a></li>
+   </ul>
+   </li>
+   <li><a href="versin_final_del_sistema_completo.html" class="no-ch">Versión final del sistema completo</a></li>
+   <li><a href="evaluacin_y_conclusiones.html" class="no-ch">Evaluación y Conclusiones</a></li>
+</ul>
+</nav>
+<div id='topPagination'>
+<nav class="pagination noprt">
+<a href="comandos_del_invernadero.html" class="prev"><span><span>&laquo; </span>Anterior</span></a> <span class="sep">| </span><a href="programacin_steamakers.html" class="next"><span>Siguiente<span> &raquo;</span></span></a>
+</nav>
+</div>
+<div id="main-wrapper">
+<section id="main">
+<header id="nodeDecoration"><h1 id="nodeTitle">Programación de la cámara ESP32</h1></header>
+<article class="iDevice_wrapper textIdevice em_iDevice" id="id5">
+<div class="iDevice emphasis1" >
+<header class="iDevice_header iDevice_header_noIcon"><h1 class="iDeviceTitle">Programación de la cámara ESP32 Cam</h1></header>
+<div class="iDevice_inner">
+<div class="iDevice_content_wrapper">
+<div id="ta5_125_2" class="block iDevice_content">
+<div class="exe-text"><p>Este dispositivo no se ha podido programar con la interfaz de arduinoblocks dado que no está incluido en la lista de componentes reconocidos. Por ello, hemos programado esta utilidad en el entorno de Arduino IDE.</p>
+<p>En primer lugar se ha añadido el repositorio de placas ESP32 en preferencias fijando <a href="https://dl.espressif.com/dl/package_esp32_index.json">https://dl.espressif.com/dl/package_esp32_index.json</a> como URL para la lectura de las placas ESP32. Después se ha seleccionado la placa AI Thinker ESP32-CAM, que es el modelo que hemos empleado para este proyecto. Después se han incluido algunas librerías que se han requerido, por ejemplo,  UniversalTelegramBot. </p>
+<p>El código escrito para control de la cámara (basado en el escrito pot Rui Santos):</p>
+<p>/*<br />Rui Santos<br />Complete project details at https://RandomNerdTutorials.com/telegram-esp32-cam-photo-arduino/<br /> <br />Permission is hereby granted, free of charge, to any person obtaining a copy<br />of this software and associated documentation files.<br /> <br />The above copyright notice and this permission notice shall be included in all<br />copies or substantial portions of the Software.<br />*/</p>
+<p>#include &lt;Arduino.h&gt;<br />#include &lt;WiFi.h&gt;<br />#include &lt;WiFiClientSecure.h&gt;<br />#include "soc/soc.h"<br />#include "soc/rtc_cntl_reg.h"<br />#include "esp_camera.h"<br />#include &lt;UniversalTelegramBot.h&gt;<br />#include &lt;ArduinoJson.h&gt;</p>
+<p>const char* ssid = "YOUR NETWORK";<br />const char* password = "YOUR PASSWORD";</p>
+<p>// Initialize Telegram BOT<br />String BOTtoken = "YOUR TOKEN"; // your Bot Token (Get from Botfather)</p>
+<p>// Use @myidbot to find out the chat ID of an individual or a group<br />// Also note that you need to click "start" on a bot before it can<br />// message you<br />String CHAT_ID = "Your CHAT ID";</p>
+<p>bool sendPhoto = false;</p>
+<p>WiFiClientSecure clientTCP;<br />UniversalTelegramBot bot(BOTtoken, clientTCP);</p>
+<p>#define FLASH_LED_PIN 4<br />bool flashState = LOW;</p>
+<p>//Checks for new messages every 1 second.<br />int botRequestDelay = 1000;<br />unsigned long lastTimeBotRan;</p>
+<p>//CAMERA_MODEL_AI_THINKER<br />#define PWDN_GPIO_NUM 32<br />#define RESET_GPIO_NUM -1<br />#define XCLK_GPIO_NUM 0<br />#define SIOD_GPIO_NUM 26<br />#define SIOC_GPIO_NUM 27</p>
+<p>#define Y9_GPIO_NUM 35<br />#define Y8_GPIO_NUM 34<br />#define Y7_GPIO_NUM 39<br />#define Y6_GPIO_NUM 36<br />#define Y5_GPIO_NUM 21<br />#define Y4_GPIO_NUM 19<br />#define Y3_GPIO_NUM 18<br />#define Y2_GPIO_NUM 5<br />#define VSYNC_GPIO_NUM 25<br />#define HREF_GPIO_NUM 23<br />#define PCLK_GPIO_NUM 22</p>
+<p><br />void configInitCamera(){<br />camera_config_t config;<br />config.ledc_channel = LEDC_CHANNEL_0;<br />config.ledc_timer = LEDC_TIMER_0;<br />config.pin_d0 = Y2_GPIO_NUM;<br />config.pin_d1 = Y3_GPIO_NUM;<br />config.pin_d2 = Y4_GPIO_NUM;<br />config.pin_d3 = Y5_GPIO_NUM;<br />config.pin_d4 = Y6_GPIO_NUM;<br />config.pin_d5 = Y7_GPIO_NUM;<br />config.pin_d6 = Y8_GPIO_NUM;<br />config.pin_d7 = Y9_GPIO_NUM;<br />config.pin_xclk = XCLK_GPIO_NUM;<br />config.pin_pclk = PCLK_GPIO_NUM;<br />config.pin_vsync = VSYNC_GPIO_NUM;<br />config.pin_href = HREF_GPIO_NUM;<br />config.pin_sscb_sda = SIOD_GPIO_NUM;<br />config.pin_sscb_scl = SIOC_GPIO_NUM;<br />config.pin_pwdn = PWDN_GPIO_NUM;<br />config.pin_reset = RESET_GPIO_NUM;<br />config.xclk_freq_hz = 20000000;<br />config.pixel_format = PIXFORMAT_JPEG;<br />config.grab_mode = CAMERA_GRAB_LATEST;</p>
+<p>//init with high specs to pre-allocate larger buffers<br />if(psramFound()){<br />config.frame_size = FRAMESIZE_UXGA;<br />config.jpeg_quality = 10; //0-63 lower number means higher quality<br />config.fb_count = 1;<br />} else {<br />config.frame_size = FRAMESIZE_SVGA;<br />config.jpeg_quality = 12; //0-63 lower number means higher quality<br />config.fb_count = 1;<br />}<br /> <br />// camera init<br />esp_err_t err = esp_camera_init(&amp;config);<br />if (err != ESP_OK) {<br />Serial.printf("Camera init failed with error 0x%x", err);<br />delay(1000);<br />//ESP.restart();<br />}<br />}</p>
+<p>void handleNewMessages(int numNewMessages) {<br />Serial.print("Handle New Messages: ");<br />Serial.println(numNewMessages);</p>
+<p>for (int i = 0; i &lt; numNewMessages; i++) {<br />String chat_id = String(bot.messages[i].chat_id);<br />if (chat_id != CHAT_ID){<br />bot.sendMessage(chat_id, "Unauthorized user", "");<br />continue;<br />}<br /> <br />// Print the received message<br />String text = bot.messages[i].text;<br />Serial.println(text);<br /> <br />String from_name = bot.messages[i].from_name;<br />if (text == "/start") {<br />String welcome = "Welcome , " + from_name + "\n";<br />welcome += "Use the following commands to interact with the ESP32-CAM \n";<br />welcome += "/photo : takes a new photo\n";<br />welcome += "/flash : toggles flash LED \n";<br />bot.sendMessage(CHAT_ID, welcome, "");<br />}<br />if (text == "/flash") {<br />flashState = !flashState;<br />digitalWrite(FLASH_LED_PIN, flashState);<br />Serial.println("Change flash LED state");<br />}<br />if (text == "/photo") {<br />sendPhoto = true;<br />Serial.println("New photo request");<br />}<br />}<br />}</p>
+<p>String sendPhotoTelegram() {<br />const char* myDomain = "api.telegram.org";<br />String getAll = "";<br />String getBody = "";</p>
+<p>//Dispose first picture because of bad quality<br />camera_fb_t * fb = NULL;<br />fb = esp_camera_fb_get();<br />esp_camera_fb_return(fb); // dispose the buffered image<br /> <br />// Take a new photo<br />fb = NULL; <br />fb = esp_camera_fb_get(); <br />if(!fb) {<br />Serial.println("Camera capture failed");<br />delay(1000);<br />//ESP.restart();<br />//return "Camera capture failed";<br />}<br /> <br />Serial.println("Connect to " + String(myDomain));</p>
+<p><br />if (clientTCP.connect(myDomain, 443)) {<br />Serial.println("Connection successful");<br /> <br />String head = "--RandomNerdTutorials\r\nContent-Disposition: form-data; name=\"chat_id\"; \r\n\r\n" + CHAT_ID + "\r\n--RandomNerdTutorials\r\nContent-Disposition: form-data; name=\"photo\"; filename=\"esp32-cam.jpg\"\r\nContent-Type: image/jpeg\r\n\r\n";<br />String tail = "\r\n--RandomNerdTutorials--\r\n";</p>
+<p>size_t imageLen = fb-&gt;len;<br />size_t extraLen = head.length() + tail.length();<br />size_t totalLen = imageLen + extraLen;<br /> <br />clientTCP.println("POST /bot"+BOTtoken+"/sendPhoto HTTP/1.1");<br />clientTCP.println("Host: " + String(myDomain));<br />clientTCP.println("Content-Length: " + String(totalLen));<br />clientTCP.println("Content-Type: multipart/form-data; boundary=RandomNerdTutorials");<br />clientTCP.println();<br />clientTCP.print(head);<br /> <br />uint8_t *fbBuf = fb-&gt;buf;<br />size_t fbLen = fb-&gt;len;<br />for (size_t n=0;n&lt;fbLen;n=n+1024) {<br />if (n+1024&lt;fbLen) {<br />clientTCP.write(fbBuf, 1024);<br />fbBuf += 1024;<br />}<br />else if (fbLen%1024&gt;0) {<br />size_t remainder = fbLen%1024;<br />clientTCP.write(fbBuf, remainder);<br />}<br />}<br /> <br />clientTCP.print(tail);<br /> <br />esp_camera_fb_return(fb);<br /> <br />int waitTime = 10000; // timeout 10 seconds<br />long startTimer = millis();<br />boolean state = false;<br /> <br />while ((startTimer + waitTime) &gt; millis()){<br />Serial.print(".");<br />delay(100); <br />while (clientTCP.available()) {<br />char c = clientTCP.read();<br />if (state==true) getBody += String(c); <br />if (c == '\n') {<br />if (getAll.length()==0) state=true; <br />getAll = "";<br />}<br />else if (c != '\r')<br />getAll += String(c);<br />startTimer = millis();<br />}<br />if (getBody.length()&gt;0) break;<br />}<br />clientTCP.stop();<br />Serial.println(getBody);<br />}<br />else {<br />getBody="Connected to api.telegram.org failed.";<br />Serial.println("Connected to api.telegram.org failed.");<br />}<br />return getBody;<br />}</p>
+<p>void setup(){<br />WRITE_PERI_REG(RTC_CNTL_BROWN_OUT_REG, 0); <br />// Init Serial Monitor<br />Serial.begin(115200);</p>
+<p>// Set LED Flash as output<br />pinMode(FLASH_LED_PIN, OUTPUT);<br />digitalWrite(FLASH_LED_PIN, flashState);</p>
+<p>// Config and init the camera<br />configInitCamera();</p>
+<p>// Connect to Wi-Fi<br />WiFi.mode(WIFI_STA);<br />Serial.println();<br />Serial.print("Connecting to ");<br />Serial.println(ssid);<br />WiFi.begin(ssid, password);<br />clientTCP.setCACert(TELEGRAM_CERTIFICATE_ROOT); // Add root certificate for api.telegram.org<br />while (WiFi.status() != WL_CONNECTED) {<br />Serial.print(".");<br />delay(500);<br />}<br />Serial.println();<br />Serial.print("ESP32-CAM IP Address: ");<br />Serial.println(WiFi.localIP()); <br />}</p>
+<p>void loop() {<br />if (sendPhoto) {<br />Serial.println("Preparing photo");<br />sendPhotoTelegram(); <br />sendPhoto = false; <br />}<br />if (millis() &gt; lastTimeBotRan + botRequestDelay) {<br />int numNewMessages = bot.getUpdates(bot.last_message_received + 1);<br />while (numNewMessages) {<br />Serial.println("got response");<br />handleNewMessages(numNewMessages);<br />numNewMessages = bot.getUpdates(bot.last_message_received + 1);<br />}<br />lastTimeBotRan = millis();<br />}<br />}</p>
+<p></p></div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<div id="packageLicense" class="cc cc-by-sa">
+<p><span>Obra publicada con</span> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Licencia Creative Commons Reconocimiento Compartir igual 4.0</a></p>
+</div>
+</section>
+</div>
+<div id='bottomPagination'>
+<nav class="pagination noprt">
+<a href="comandos_del_invernadero.html" class="prev"><span><span>&laquo; </span>Anterior</span></a> <span class="sep">| </span><a href="programacin_steamakers.html" class="next"><span>Siguiente<span> &raquo;</span></span></a>
+</nav>
+</div>
+</div>
+<p id="made-with-eXe"><a href="https://exelearning.net/" target="_blank" rel="noopener"><span>Creado con eXeLearning<span> (Ventana nueva)</span></span></a></p><script type="text/javascript" src="_intef_js.js"></script></body></html>

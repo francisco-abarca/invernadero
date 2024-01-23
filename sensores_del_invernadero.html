@@ -28,6 +28,16 @@
    <li><a href="automatizacin_del_riego.html" class="no-ch">Automatización del riego</a></li>
    <li id="active"><a href="sensores_del_invernadero.html" class="active no-ch">Sensores del Invernadero</a></li>
    <li><a href="comandos_del_invernadero.html" class="no-ch">Comandos del Invernadero</a></li>
+   <li><a href="programacin_de_la_cmara_esp32.html" class="no-ch">Programación de la cámara ESP32</a></li>
+   <li><a href="programacin_steamakers.html" class="no-ch">Programación SteaMakers</a></li>
+   <li><a href="home_assistant_en_raspberry_pi.html" class="daddy">Home Assistant en Raspberry Pi</a>
+   <ul class="other-section">
+      <li><a href="configuracin_de_esphome.html" class="no-ch">Configuración de ESPHOME</a></li>
+      <li><a href="configuracin_de_actuadores.html" class="no-ch">Configuración de actuadores</a></li>
+   </ul>
+   </li>
+   <li><a href="versin_final_del_sistema_completo.html" class="no-ch">Versión final del sistema completo</a></li>
+   <li><a href="evaluacin_y_conclusiones.html" class="no-ch">Evaluación y Conclusiones</a></li>
 </ul>
 </nav>
 <div id='topPagination'>
@@ -45,14 +55,14 @@
 <table border="1" style="width: 100%;">
 <tbody>
 <tr>
-<td style="width: 33.3333%;"><img src="IMG_2168.jpg" alt="" width="1512" height="2016" />Cámara ESP32-CAM con luz Flash incorporada</td>
+<td style="width: 33.3333%;"><img src="IMG_2168.jpg" alt="" width="1512" height="2016" />Cámara ESP32-CAM con luz Flash incorporada controlada por una ESP32 dedicada. La luz de flash se controla independientemente.</td>
 <td style="width: 33.3333%;"><img src="IMG_2170.jpg" alt="" width="1512" height="2016" />Sensor Analógico de Temperatura para medida exterior </td>
-<td style="width: 33.3333%;"><img src="IMG_2171.jpg" alt="" width="1512" height="2016" />Sensor DHT11 para medida de temperatura y humedad en el interior del invernadero</td>
+<td style="width: 33.3333%;"><img src="IMG_2171.jpg" alt="" width="1512" height="2016" />Sensor DHT11 para medida de temperatura y humedad en el interior del invernadero conectado en 14-D7</td>
 </tr>
 <tr>
 <td style="width: 33.3333%;">
 <p><img src="IMG_2172.jpg" alt="" width="556" height="741" /></p>
-<p>Sensor DHT22 para medida de humedad y temperatura exterior</p>
+<p>Sensor DHT22 para medida de humedad y temperatura exterior. Conectado a 27-D6.</p>
 </td>
 <td style="width: 33.3333%;">
 <p><img src="14_gy_bme280_3.3_module.png" alt="" width="522" height="522" /></p>
@@ -62,12 +72,13 @@
 <p></p>
 <p></p>
 <p></p>
-<p>Sensor BMP280 para la medida de la presión barométrica y la temperatura en el exterior</p>
+<p>Sensor BMP280 para la medida de la presión barométrica y la temperatura en el exterior. Conexion I2C</p>
 </td>
-<td style="width: 33.3333%;"><img src="camphoto_33463914.JPG" alt="" width="1512" height="2016" />Electroválvula, apertura y cierre con un final de carrera controlado por la ESP32. Asimismo, Relé interno que controla la puesta en marcha y paro del motor de control. Dispositivo reutilizado de una automatismo averiado.</td>
+<td style="width: 33.3333%;"><img src="camphoto_33463914.JPG" alt="" width="1512" height="2016" />Electroválvula, apertura y cierre con un final de carrera controlado por la ESP32. Asimismo, Relé interno que controla la puesta en marcha y paro del motor de control. Dispositivo reutilizado de una automatismo averiado. Motor controlado por relé en 17-D4 y final de carrera en 12-D8</td>
 </tr>
 </tbody>
 </table>
+<p>Además el control de la ventana de techo del invernadero se realiza con un motor paso a paso conectado a los pines 18-D13, 19-D12, 23-D11  y 5-D10.</p>
 <p>Estos son los sensores que directamente se controlan desde la ESP32 SteaMakers y cuyo control y programación se ha llevado a cabo mediante arduinoBlocks. Asimismo, con este programa se ha desarrollado el control de la tarjeta a través de comando enviados desde telegram.  Y además se usará la ESP32-CAM para control de la cámara de fotos/video y la luz. Los comandos de control desde Telegram son:</p>
 <blockquote>
 <p>/humedad</p>
@@ -79,7 +90,47 @@
 <p>/foto **</p>
 <p>/video on|off **</p>
 </blockquote>
-<p>Estos comandos son los que gestionan los actuadores, sensores y captadores propios. ** Se controlan desde un bot específico para la ESP32-CAM</p></div>
+<p>Estos comandos son los que gestionan los actuadores, sensores y captadores propios. ** Se controlan desde un bot específico para la ESP32-CAM</p>
+<p>Se muestran algunos detalles de los mecanismos y sensores instalados en el invernadero:</p>
+<table border="1" style="width: 100%; height: 805px;">
+<tbody>
+<tr style="height: 805px;">
+<td style="width: 33.3333%; height: 805px;">
+<p><img src="IMG_2185_1.jpg" alt="" width="962" height="1280" /></p>
+<p>Antes</p>
+</td>
+<td style="width: 33.3333%; height: 805px;">
+<p><img src="IMG_2193.jpg" alt="" width="1512" height="2016" /></p>
+<p>Después</p>
+</td>
+<td style="width: 33.3333%; height: 805px;">
+<p><img src="IMG_2195.jpg" alt="" width="1512" height="2016" /></p>
+<p>Riego automático  instalado. Control de Relé para motor y final de carrera.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<table border="1" style="width: 100%;">
+<tbody>
+<tr>
+<td style="width: 33.3333%;">
+<p><img src="IMG_2179.jpg" alt="" width="1512" height="2016" /></p>
+<p>Antes</p>
+</td>
+<td style="width: 33.3333%;">
+<p><img src="IMG_2181.jpg" alt="" width="1512" height="2016" /></p>
+<p>Mecanismo de apertura instalado. Piñón cremallera controlado motor paso a paso</p>
+</td>
+<td style="width: 33.3333%;">
+<p><img src="IMG_2189.jpg" alt="" width="1512" height="2016" /></p>
+<p>Piñón-cremallera diseñado e impreso en 3D. Controlado por motor paso a paso</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p></p>
+<p></p>
+<p></p></div>
 </div>
 </div>
 </article>
