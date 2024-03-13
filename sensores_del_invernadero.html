@@ -9,7 +9,7 @@
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 <meta name="author" content="FRANCISCO ABARCA" />
 <link rel="license" type="text/html" href="http://creativecommons.org/licenses/by-sa/4.0/" />
-<meta name="generator" content="eXeLearning 2.8 - exelearning.net" />
+<meta name="generator" content="eXeLearning 2.8 Portable - exelearning.net" />
 <!--[if lt IE 9]><script type="text/javascript" src="exe_html5.js"></script><![endif]-->
 <script type="text/javascript" src="exe_jquery.js"></script>
 <script type="text/javascript" src="common_i18n.js"></script>
@@ -27,22 +27,18 @@
    <li><a href="puesta_a_punto_del_invernadero.html" class="no-ch">Puesta a punto del Invernadero</a></li>
    <li><a href="automatizacin_del_riego.html" class="no-ch">Automatización del riego</a></li>
    <li id="active"><a href="sensores_del_invernadero.html" class="active no-ch">Sensores del Invernadero</a></li>
+   <li><a href="comunicaciones_lora.html" class="no-ch">Comunicaciones LoRa</a></li>
    <li><a href="comandos_del_invernadero.html" class="no-ch">Comandos del Invernadero</a></li>
    <li><a href="programacin_de_la_cmara_esp32.html" class="no-ch">Programación de la cámara ESP32</a></li>
    <li><a href="programacin_steamakers.html" class="no-ch">Programación SteaMakers</a></li>
-   <li><a href="home_assistant_en_raspberry_pi.html" class="daddy">Home Assistant en Raspberry Pi</a>
-   <ul class="other-section">
-      <li><a href="configuracin_de_esphome.html" class="no-ch">Configuración de ESPHOME</a></li>
-      <li><a href="configuracin_de_actuadores.html" class="no-ch">Configuración de actuadores</a></li>
-   </ul>
-   </li>
+   <li><a href="home_assistant_en_raspberry_pi.html" class="no-ch">Home Assistant en Raspberry Pi</a></li>
    <li><a href="versin_final_del_sistema_completo.html" class="no-ch">Versión final del sistema completo</a></li>
    <li><a href="evaluacin_y_conclusiones.html" class="no-ch">Evaluación y Conclusiones</a></li>
 </ul>
 </nav>
 <div id='topPagination'>
 <nav class="pagination noprt">
-<a href="automatizacin_del_riego.html" class="prev"><span><span>&laquo; </span>Anterior</span></a> <span class="sep">| </span><a href="comandos_del_invernadero.html" class="next"><span>Siguiente<span> &raquo;</span></span></a>
+<a href="automatizacin_del_riego.html" class="prev"><span><span>&laquo; </span>Anterior</span></a> <span class="sep">| </span><a href="comunicaciones_lora.html" class="next"><span>Siguiente<span> &raquo;</span></span></a>
 </nav>
 </div>
 <div id="main-wrapper">
@@ -56,13 +52,13 @@
 <tbody>
 <tr>
 <td style="width: 33.3333%;"><img src="IMG_2168.jpg" alt="" width="1512" height="2016" />Cámara ESP32-CAM con luz Flash incorporada controlada por una ESP32 dedicada. La luz de flash se controla independientemente.</td>
-<td style="width: 33.3333%;"><img src="IMG_2170.jpg" alt="" width="1512" height="2016" />Sensor Analógico de Temperatura para medida exterior </td>
-<td style="width: 33.3333%;"><img src="IMG_2171.jpg" alt="" width="1512" height="2016" />Sensor DHT11 para medida de temperatura y humedad en el interior del invernadero conectado en 14-D7</td>
+<td style="width: 33.3333%;"><img src="IMG_2170.jpg" alt="" width="1512" height="2016" />Sensor Analógico de Temperatura para medida exterior. No conectado.</td>
+<td style="width: 33.3333%;"><img src="IMG_2171.jpg" alt="" width="1512" height="2016" />Sensor DHT11 para medida de temperatura y humedad en el interior del invernadero conectado en A2 (Analógíco 2), pues todos los puertos digitales están ocupados.</td>
 </tr>
 <tr>
 <td style="width: 33.3333%;">
 <p><img src="IMG_2172.jpg" alt="" width="556" height="741" /></p>
-<p>Sensor DHT22 para medida de humedad y temperatura exterior. Conectado a 27-D6.</p>
+<p>Sensor DHT22 para medida de humedad y temperatura exterior. No Conectado. </p>
 </td>
 <td style="width: 33.3333%;">
 <p><img src="14_gy_bme280_3.3_module.png" alt="" width="522" height="522" /></p>
@@ -78,7 +74,7 @@
 </tr>
 </tbody>
 </table>
-<p>Además el control de la ventana de techo del invernadero se realiza con un motor paso a paso conectado a los pines 18-D13, 19-D12, 23-D11  y 5-D10.</p>
+<p>Además el control de la ventana de techo del invernadero se realiza con un motor paso a paso conectado a los pines 18-D13, 19-D12, 23-D11  y 5-D10. </p>
 <p>Estos son los sensores que directamente se controlan desde la ESP32 SteaMakers y cuyo control y programación se ha llevado a cabo mediante arduinoBlocks. Asimismo, con este programa se ha desarrollado el control de la tarjeta a través de comando enviados desde telegram.  Y además se usará la ESP32-CAM para control de la cámara de fotos/video y la luz. Los comandos de control desde Telegram son:</p>
 <blockquote>
 <p>/humedad</p>
@@ -141,8 +137,8 @@
 </div>
 <div id='bottomPagination'>
 <nav class="pagination noprt">
-<a href="automatizacin_del_riego.html" class="prev"><span><span>&laquo; </span>Anterior</span></a> <span class="sep">| </span><a href="comandos_del_invernadero.html" class="next"><span>Siguiente<span> &raquo;</span></span></a>
+<a href="automatizacin_del_riego.html" class="prev"><span><span>&laquo; </span>Anterior</span></a> <span class="sep">| </span><a href="comunicaciones_lora.html" class="next"><span>Siguiente<span> &raquo;</span></span></a>
 </nav>
 </div>
 </div>
-<p id="made-with-eXe"><a href="https://exelearning.net/" target="_blank" rel="noopener"><span>Creado con eXeLearning<span> (Ventana nueva)</span></span></a></p><script type="text/javascript" src="_intef_js.js"></script></body></html>
+<p id="made-with-eXe"><a href="https://exelearning.net/" target="_blank" rel="noopener"><span>Creado con eXeLearning<span> (Ventana nueva)</span></span></a></p><script type="text/javascript" src="_escolares_js.js"></script></body></html>
